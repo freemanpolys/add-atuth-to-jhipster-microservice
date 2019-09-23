@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "sn.sonatel.dsi.dac",
+      "nativeLanguage": "fr"
+    },
+    "jhipsterVersion": "5.8.2",
+    "applicationType": "microservice",
+    "baseName": "authentication",
+    "packageName": "sn.sonatel.dsi.dac",
+    "packageFolder": "sn/sonatel/dsi/dac",
+    "serverPort": "8081",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "no",
+    "devDatabaseType": "no",
+    "prodDatabaseType": "no",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZDgwZTAzZTgxNDQ2MTY5Zjc5ZWI3OTgzMmU0M2U0ZmI3NzczMzI2MmEyYTU2ZWQ1YWE4Y2E2ZDhjMTM1MzMwNzZkY2E5ZTY2OWU5MzQwODNkM2MxYzE3NWI3ZTExNTViNmUzZTY2OThmNzA1NjI5ODA0YTU4YWUyZWNkYWY1NjY=",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "fr",
+    "languages": [
+      "fr"
+    ],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
