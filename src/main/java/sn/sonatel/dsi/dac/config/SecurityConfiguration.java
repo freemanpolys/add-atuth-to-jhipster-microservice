@@ -1,9 +1,12 @@
 package sn.sonatel.dsi.dac.config;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import sn.sonatel.dsi.dac.custom.CustomAuthenticationProvider;
 import sn.sonatel.dsi.dac.security.*;
 import sn.sonatel.dsi.dac.security.jwt.*;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
@@ -25,9 +28,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final SecurityProblemSupport problemSupport;
 
-    public SecurityConfiguration(TokenProvider tokenProvider, SecurityProblemSupport problemSupport) {
+    private final CustomAuthenticationProvider customAuthenticationProvider;
+
+    public SecurityConfiguration(TokenProvider tokenProvider, SecurityProblemSupport problemSupport, CustomAuthenticationProvider customAuthenticationProvider) {
         this.tokenProvider = tokenProvider;
         this.problemSupport = problemSupport;
+        this.customAuthenticationProvider = customAuthenticationProvider;
     }
 
     @Override
@@ -55,6 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
             .authorizeRequests()
+            .antMatchers("/api/authenticate").permitAll()
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/info").permitAll()
@@ -66,5 +73,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private JWTConfigurer securityConfigurerAdapter() {
         return new JWTConfigurer(tokenProvider);
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .authenticationProvider(customAuthenticationProvider);
     }
 }
